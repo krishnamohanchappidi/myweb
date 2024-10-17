@@ -21,7 +21,7 @@ pipeline{
         }
         stage('Build Docker Image'){
             steps{
-                 sh 'docker build -t krishnamohanchappidi/Dockerfile .'
+                 sh 'docker build -t krishnamohanchappidi/dockerfile .'
                  sh 'docker build -t tomcat:${BUILD_NUMBER} .'
                  sh 'docker run -itd --name srini33 -p 3800:8080 tomcat:${BUILD_NUMBER}'
              }
@@ -31,7 +31,7 @@ pipeline{
                   withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIALS', variable: 'DOCKER_HUB_CREDENTIALS')]) {
                       sh "docker login -u krishnamohanchappidi -p ${DOCKER_HUB_CREDENTIALS}"
             }
-            sh 'docker push krishnamohanchappidi/Dockerfile'
+            sh 'docker push krishnamohanchappidi/dockerfile'
         }
       }
         
